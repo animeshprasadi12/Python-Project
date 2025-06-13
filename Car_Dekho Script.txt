@@ -49,6 +49,8 @@ from multiple decision trees.
 
 --- Why we used Random Forest Regressor?
 
+It provide 75% accuracy than Linear Regression which is 70%.
+
 1. Real-life data is not always linear-
     Random Forest handles non-linear patterns automatically.
     Used car prices don’t follow a perfect straight-line pattern.
