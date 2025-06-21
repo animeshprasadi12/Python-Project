@@ -1,0 +1,86 @@
+Analyzing selling price of used cars using Python
+
+
+--- Random Forest
+    A random forest is an ensemble learning method 
+that combines the predictions from multiple decision trees 
+to produce a more accurate and stable prediction. 
+    It is a type of supervised learning algorithm 
+that can be used for both classification and regression tasks.
+
+Objective:
+    is to minimize the Mean Squared Error (MSE) or 
+    Mean Absolute Error (MAE) between the predicted and actual values.
+    
+    In regression task we use Random Forest Regression technique
+for predicting numerical values, 
+eg: our project- Analyzing selling price of used cars using Python.
+It predicts continuous values by averaging the results 
+of multiple decision trees.
+
+    In classification tasks, we use Random Forest Classifier technique
+for predicting categorical values or class labels,
+eg: predicting whether an email is “Spam” or “Not Spam”,
+or whether a customer will “Buy” or “Not Buy” a product.
+It predicts class labels by taking a majority vote 
+from multiple decision trees.
+
+
+--- Features
+1. High accuracy
+2. Works for both regression & classification
+3. Reduces overfitting
+
+
+--- Benefits
+1. Combines multiple trees for better results
+2. Very flexible algorithm
+3. Averages many trees, so it doesn’t memorize the data
+
+
+--- Applications
+1. Healthcare-
+    Disease diagnosis (e.g., predicting diabetes)
+2. Banking-
+    Fraud detection
+3. Automobile-
+    Predicting resale value of used cars 
+
+
+--- Why we used Random Forest Regressor?
+
+1. Real-life data is not always linear-
+    Random Forest handles non-linear patterns automatically.
+    Used car prices don’t follow a perfect straight-line pattern.
+    For example:
+	•	A 2-year-old car vs. a 10-year-old car — price drop isn’t linear
+	•	Cars with similar mileage might have very different prices
+
+2. Handles mixed data types better-
+    Random Forest naturally handles this mix using decision trees.
+    My dataset includes:
+	•	Numbers: Year, KM_Driven
+	•	Categories: Fuel_Type, Transmission, Owner, Seller_Type
+
+3. Captures feature interactions-
+    For instance, a diesel car holds value better only if it’s under 5 years old.
+    Random Forest learns these hidden rules.
+    Linear Regression cannot model such relationships.
+
+4. Higher accuracy-
+    In most real-world cases, 
+    Random Forest gives a better R² score & lower error, 
+    especially when: We have many features & the data is not perfectly clean
+
+
+--- Steps followed:
+1. Loading the dataset
+2. Exploring the dataset
+3. Preprocessing (dropping irrelevant columns,
+    encoding categorical features)
+4. Splitting data into training & testing sets
+5. Training the Random Forest model
+6. Evaluating the model
+7. Visualizing results (Actual vs Predicted, Feature Importances)
+
+
