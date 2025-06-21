@@ -1,0 +1,134 @@
+
+----- EXPLANATION OF USED CAR PRICE PREDICTION CODE -----
+
+
+-------------------------------
+IMPORTING LIBRARIES
+-------------------------------
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, r2_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+- pandas: for working with tabular data (DataFrame)
+- numpy: for numerical operations
+- train_test_split: to split data into training and testing
+- RandomForestRegressor: the model used to predict car price
+- mean_absolute_error, r2_score: metrics to check model accuracy
+- matplotlib, seaborn: for plotting graphs
+
+-------------------------------
+LOADING THE DATASET
+-------------------------------
+df = pd.read_csv('Car_Dekho.csv')
+
+- Reads the CSV file and loads it into a pandas DataFrame
+
+-------------------------------
+DATA PREVIEW
+-------------------------------
+print("Dataset Preview:\n", df)
+print("\nDataset Description:\n", df.describe())
+print("\nColumn Names:\n", df.columns)
+print("\nDataset Shape:\n", df.shape)
+
+- df: shows entire data
+- df.describe(): summary stats of numeric columns
+- df.columns: prints column names
+- df.shape: prints (rows, columns)
+
+-------------------------------
+DROP UNNECESSARY COLUMNS
+-------------------------------
+df.drop(columns=['Brand', 'Model'], inplace=True)
+
+- Removes columns that are not useful for prediction
+
+-------------------------------
+ENCODING CATEGORICAL VARIABLES
+-------------------------------
+df = pd.get_dummies(df, drop_first=True)
+
+- Converts categorical text into numbers using one-hot encoding
+- drop_first=True: avoids duplicate columns
+
+-------------------------------
+SPLITTING FEATURES AND TARGET
+-------------------------------
+X = df.drop('Selling_Price', axis=1)
+y = df['Selling_Price']
+
+- X: input features
+- y: target/output variable
+
+-------------------------------
+TRAIN-TEST SPLIT
+-------------------------------
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+- 80% training, 20% testing
+- random_state ensures same result every time
+
+-------------------------------
+TRAINING THE MODEL
+-------------------------------
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+- Creates a random forest model with 100 trees
+- Fits it to the training data
+
+-------------------------------
+PREDICTING
+-------------------------------
+y_pred = model.predict(X_test)
+
+- Predicts the car price for test data
+
+-------------------------------
+EVALUATING THE MODEL
+-------------------------------
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+- MAE: average difference between actual and predicted
+- R2: accuracy score (closer to 1 is better)
+
+print(f"Mean Absolute Error: {mae:.2f}")
+print(f"R2 Score: {r2:.2f}")
+
+- Prints evaluation scores
+
+-------------------------------
+PLOTTING ACTUAL VS PREDICTED
+-------------------------------
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred, alpha=0.6, color='teal')
+plt.xlabel("Actual Selling Price")
+plt.ylabel("Predicted Selling Price")
+plt.title("Actual vs Predicted Selling Price")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+- Scatter plot to compare actual vs predicted prices
+
+-------------------------------
+FEATURE IMPORTANCE
+-------------------------------
+importances = pd.Series(model.feature_importances_, index=X.columns)
+plt.figure(figsize=(8, 6))
+importances.sort_values(ascending=True).plot(kind='barh', color='purple')
+plt.title("Feature Importances")
+plt.tight_layout()
+plt.show()
+
+- Shows which features influenced the predictions the most
+
+------------------------------------------------------------
+This script is for Regression: predicting a numerical value.
+Random Forest is used because it's accurate, robust, and handles complex data.
+------------------------------------------------------------
